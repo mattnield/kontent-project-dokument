@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Kontent Dokumentor</h1>
+    <p>This project uses the <a href="https://kontent.ai">Kentico Kontent</a> <a href="https://docs.kontent.ai/tutorials/develop-apps/get-started/sdks?tech=dotnet">Delivery .NET SDK</a> to build a <em>crude</em> set of documentation fro your project. This is an experiment by <a href="https://www.mattnield.co.uk">Matt Nield</a> and is not intended for commerical use. </p>
+    <fieldset>
+        <legend>Project Details</legend>
+        <form method="post">
+        <label asp-for="ProjectId">Project ID</label><input type="text" id="projectId" name="ProjectId" >
+        <input type="submit" value="Dokument!">
+        </form>
+    </fieldset>
+</div>
+
+@section results {
+    
+    @if(@Model.Types != null){
+        <div class="result">
+            <hr>
+            <p>Results genereate for project Id <code>@Model.ProjectId</code> on <code>@DateTime.Now</code></p>
+
+            @Html.DisplayFor(m => Model.Types)
+        </div>
+    }
+}
+
+
+
