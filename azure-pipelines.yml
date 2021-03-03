@@ -12,11 +12,11 @@ steps:
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Pack'
+  displayName: 'publish'
   inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    versioningScheme: 'off'
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) /p:WebPublishMethod=Package /p:PackageAsSingleFile=true'
 - task: AzureWebApp@1
   displayName: 'Deploy'
   inputs:
