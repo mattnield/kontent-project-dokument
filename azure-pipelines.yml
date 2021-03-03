@@ -35,6 +35,6 @@ steps:
     azureSubscription: 'Pay-As-You-Go Dev/Test(e1c57c69-d68b-4581-9065-f76b9798f2ee)'
     appType: 'webApp'
     appName: 'kontent-dokument'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     deploymentMethod: 'auto'
 
