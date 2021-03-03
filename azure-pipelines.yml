@@ -2,26 +2,35 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: 'Build'
+  displayName: 'Build web project'
   inputs:
     command: 'build'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: 'publish'
+  displayName: 'Publish and zip'
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) /p:WebPublishMethod=Package /p:PackageAsSingleFile=true'
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+    zipAfterPublish: True
+
 - task: AzureWebApp@1
-  displayName: 'Deploy'
+  displayName: 'Deploy Azure Web App'
   inputs:
     azureSubscription: 'Pay-As-You-Go Dev/Test(e1c57c69-d68b-4581-9065-f76b9798f2ee)'
     appType: 'webApp'
     appName: 'kontent-dokument'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
     deploymentMethod: 'auto'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Build artifacts'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
