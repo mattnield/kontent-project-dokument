@@ -4,6 +4,9 @@ trigger:
 pool:
   vmImage: windows-latest
 
+variables:
+  BuildConfiguration: 'Release'
+
 steps:
 - task: DotNetCoreCLI@2
   displayName: 'Build web project'
