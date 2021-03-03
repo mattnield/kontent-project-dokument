@@ -1,0 +1,27 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Pack'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    versioningScheme: 'off'
+- task: AzureWebApp@1
+  displayName: 'Deploy'
+  inputs:
+    azureSubscription: 'Pay-As-You-Go Dev/Test(e1c57c69-d68b-4581-9065-f76b9798f2ee)'
+    appType: 'webApp'
+    appName: 'kontent-dokument'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
