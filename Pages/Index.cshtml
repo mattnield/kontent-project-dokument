@@ -6,14 +6,18 @@
 
 <div class="text-center">
     <h1 class="display-4">Kontent Dokumentor</h1>
-    <p>This project uses the <a href="https://kontent.ai">Kentico Kontent</a> <a href="https://docs.kontent.ai/tutorials/develop-apps/get-started/sdks?tech=dotnet">Delivery .NET SDK</a> to build a <em>crude</em> set of documentation fro your project. This is an experiment by <a href="https://www.mattnield.co.uk">Matt Nield</a> and is not intended for commerical use. </p>
-    <fieldset>
-        <legend>Project Details</legend>
-        <form method="post">
-        <label asp-for="ProjectId">Project ID</label><input type="text" id="projectId" name="ProjectId" >
-        <input type="submit" value="Dokument!">
-        </form>
-    </fieldset>
+    <p>This project uses the <a href="https://kontent.ai">Kentico Kontent</a> <a href="https://docs.kontent.ai/tutorials/develop-apps/get-started/sdks?tech=dotnet">Delivery .NET SDK</a> to build a <em>crude</em> set of documentation for your project. This is an experiment by <a href="https://www.mattnield.co.uk">Matt Nield</a> and is not intended for commerical use. </p>
+    <h2>Project Details</h2>
+    <form method="post">
+        <div class="form-group row">
+            <label asp-for="ProjectId" class="col-sm-2 col-form-label">Project ID</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="projectId" name="ProjectId" placeholder="Enter you Kontent Project ID" >
+            <small id="projectIdHelp" class="form-text text-muted">You can find your Project ID in the <strong>Project Settings > API Keys</strong> area of your project</small>
+            </div>
+        </div>
+        <button type="submit"  class="btn btn-primary">Dokument!</button>
+    </form>
 </div>
 
 @section results {
